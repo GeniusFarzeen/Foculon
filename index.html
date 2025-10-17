@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>GitHub SaaS — Mini Tools</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>GitHub SaaS — Mini Tools</h1>
+    <nav>
+      <button data-tool="stopwatch" class="nav-btn">Stopwatch</button>
+      <button data-tool="counter" class="nav-btn">Counter</button>
+      <button data-tool="text" class="nav-btn">Text Converter</button>
+      <button data-tool="unit" class="nav-btn">Unit Converter</button>
+      <button data-tool="focus" class="nav-btn">FocusFlow Timer</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- Stopwatch -->
+    <section id="stopwatch" class="tool">
+      <h2>Stopwatch</h2>
+      <div class="display" id="sw-display">00:00:00.00</div>
+      <div class="controls">
+        <button id="sw-start">Start</button>
+        <button id="sw-stop">Stop</button>
+        <button id="sw-reset">Reset</button>
+      </div>
+    </section>
+
+    <!-- Counter -->
+    <section id="counter" class="tool hidden">
+      <h2>Counter</h2>
+      <div class="display" id="counter-display">0</div>
+      <div class="controls">
+        <button id="count-decrement">-</button>
+        <button id="count-increment">+</button>
+        <button id="count-reset">Reset</button>
+      </div>
+    </section>
+
+    <!-- Text Converter -->
+    <section id="text" class="tool hidden">
+      <h2>Text Converter</h2>
+      <textarea id="text-input" rows="6" placeholder="Paste text here..."></textarea>
+      <div class="controls">
+        <button id="to-upper">UPPERCASE</button>
+        <button id="to-lower">lowercase</button>
+        <button id="count-words">Word Count</button>
+      </div>
+      <div id="text-output" class="display small"></div>
+    </section>
+
+    <!-- Unit Converter -->
+    <section id="unit" class="tool hidden">
+      <h2>Unit Converter (Length)</h2>
+      <div class="row">
+        <input id="unit-value" type="number" placeholder="Value" />
+        <select id="unit-from">
+          <option value="m">Meters</option>
+          <option value="ft">Feet</option>
+        </select>
+        →
+        <select id="unit-to">
+          <option value="ft">Feet</option>
+          <option value="m">Meters</option>
+        </select>
+        <button id="unit-convert">Convert</button>
+      </div>
+      <div id="unit-output" class="display small"></div>
+    </section>
+
+    <!-- FocusFlow Timer -->
+    <section id="focus" class="tool hidden">
+      <h2>FocusFlow Timer (Pomodoro-ish)</h2>
+      <div class="row">
+        <label>Minutes:
+          <input id="focus-min" type="number" value="25" min="1" max="180"/>
+        </label>
+        <label>Break (min):
+          <input id="break-min" type="number" value="5" min="1" max="60"/>
+        </label>
+      </div>
+      <div class="display" id="focus-display">25:00</div>
+      <div class="controls">
+        <button id="focus-start">Start</button>
+        <button id="focus-stop">Stop</button>
+        <button id="focus-reset">Reset</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Built by Farzeen — GitHub SaaS Mini Tools</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
