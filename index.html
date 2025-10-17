@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Foculon — Mini Tools</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Make Stopwatch bigger */
+    #sw-display {
+      font-size: 4rem; 
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    /* CPS display styling */
+    #cps-display {
+      font-size: 2rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
+    .display { margin: 10px 0; text-align: center; }
+    .small { font-size: 1.2rem; }
+    .controls { text-align: center; margin: 10px 0; }
+    button { margin: 5px; padding: 10px 15px; }
+  </style>
 </head>
 <body>
   <header>
@@ -15,6 +40,7 @@
       <button data-tool="text" class="nav-btn">Text Converter</button>
       <button data-tool="unit" class="nav-btn">Unit Converter</button>
       <button data-tool="focus" class="nav-btn">FocusFlow Timer</button>
+      <button data-tool="cps" class="nav-btn">CPS Tester</button>
     </nav>
   </header>
 
@@ -90,6 +116,17 @@
         <button id="focus-reset">Reset</button>
       </div>
     </section>
+
+    <!-- CPS Tester -->
+    <section id="cps" class="tool hidden">
+      <h2>CPS Tester (Clicks Per Second)</h2>
+      <button id="cps-btn">Click Me!</button>
+      <div class="display small" id="cps-display">0 CPS</div>
+      <div class="controls">
+        <button id="cps-reset">Reset</button>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -97,5 +134,37 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Tool navigation
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const tools = document.querySelectorAll('.tool');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tools.forEach(t => t.classList.add('hidden'));
+        document.getElementById(btn.dataset.tool).classList.remove('hidden');
+      });
+    });
+
+    // CPS Tester JS
+    let cpsCount = 0;
+    let cpsStartTime = null;
+    const cpsBtn = document.getElementById('cps-btn');
+    const cpsDisplay = document.getElementById('cps-display');
+    const cpsReset = document.getElementById('cps-reset');
+
+    cpsBtn.addEventListener('click', () => {
+      if (!cpsStartTime) cpsStartTime = Date.now();
+      cpsCount++;
+      const elapsed = (Date.now() - cpsStartTime) / 1000;
+      const cps = (cpsCount / elapsed).toFixed(2);
+      cpsDisplay.textContent = `${cps} CPS`;
+    });
+
+    cpsReset.addEventListener('click', () => {
+      cpsCount = 0;
+      cpsStartTime = null;
+      cpsDisplay.textContent = "0 cps";
+  });
+  </script>
 </body>
 </html>
